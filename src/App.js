@@ -28,7 +28,7 @@ export default class App extends Component {
         let state = this.state;
         state.startNumber += 0.1;
         this.setState(state);
-      }, 1000);
+      }, 100);
       state.btnStart = 'PAUSE';
     }
 

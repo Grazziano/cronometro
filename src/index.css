@@ -1,3 +1,8 @@
+@font-face{
+  font-family:'digital-clock-font';
+  src: url('./assets/fonts/digital-7\ \(mono\).ttf');
+}
+
 body {
   background-image: url(./assets/image/times-up-time.gif);
   background-size: cover;
@@ -5,6 +10,7 @@ body {
 
 .title {
   color: #fff;
+  margin: 80px 0;
 }
 
 .container {
@@ -21,6 +27,8 @@ body {
 }
 
 .timer {
+  color: #fff;
+  font-family: 'digital-clock-font';
   font-size: 120px;
   margin-top: -250px;
 }
@@ -42,7 +50,7 @@ body {
 }
 
 .btn:hover {
-  opacity: 0.7;
+  opacity: 0.5;
   color: #000;
   transition: all 0.50s;
 }
