@@ -4,8 +4,12 @@
 }
 
 body {
-  background-image: url(./assets/image/times-up-time.gif);
+  background-image: url(./assets/image/453353.jpg);
   background-size: cover;
+}
+
+.navbar {
+  padding: 20px;
 }
 
 .title {
