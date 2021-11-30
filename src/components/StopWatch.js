@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Title from './Title';
-import img from '../assets/image/cronometro.png';
+import img from '../assets/image/big_timer.png';
 
 export default class StopWatch extends Component {
     constructor(props) {
@@ -67,7 +67,7 @@ export default class StopWatch extends Component {
       <div className="container">
         <Title title="Cronômetro" />
         <img className="image" src={ img } alt="Cronômetro" />
-        <p className="timer">{ this.state.startNumber.toFixed(1) }</p>
+        <p className="stopwatch">{ this.state.startNumber.toFixed(1) }</p>
         <div className="btnDiv">
           <button className="btn" onClick={ this.start }>{ btnStart }</button>
           <button className="btn" onClick={ this.reset }>RESET</button>
