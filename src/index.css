@@ -64,7 +64,8 @@ body {
 }
 
 .input-section input {
-  width: 100px;
+  /* width: 100px; */
+  width: 180px;
 }
 
 .input-section input[type="button"] {

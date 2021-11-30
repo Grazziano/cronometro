@@ -6,52 +6,70 @@ export default class Timer extends Component {
     super();
 
     this.state = {
-      timerDays: '00',
-      timerHours: '00',
-      timerMinutes: '00',
-      timerSeconds: '00',
+      timeDate: '',
+      days: '00',
+      hours: '00',
+      minutes: '00',
+      seconds: '00',
+      btnStart: 'START',
     }
 
     this.timer = null;
 
     this.startTimer = this.startTimer.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   startTimer() {
-    const timer = new Date('Dec 25 2021 00:00:00');
+    if (this.timer === null) {
+      // const { timeDate, days, hours, minutes, seconds } = this.state;
+      const { timeDate } = this.state;
+      // const year = new Date().getFullYear();
+      // const month = new Date().getMonth();
+      // const timer = new Date('Dec 25 2021 00:00:00');
+      const timer = new Date(timeDate);
+      // const timer = new Date(`${month} ${days} ${year} ${hours}:${minutes}:${seconds}`);
+      // const timer = new Date(year, month, days , hours, minutes, seconds);
+      console.log(timeDate);
 
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = timer - now;
+      this.timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = timer - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)));
-      const minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)));
+        const minutes = Math.floor(distance % (1000 * 60 * 60) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      if (distance < 0) {
-        //stop timer
-        clearInterval(this.timer);
-      } else {
-        this.setState(
-          {
-            days,
-            hours,
-            minutes,
-            seconds,
-          },
-        )
-      }
-    }, 1000);
+        if (distance < 0) {
+          //stop timer
+          clearInterval(this.timer);
+        } else {
+          this.setState(
+            {
+              days,
+              hours,
+              minutes,
+              seconds,
+            },
+          )
+        }
+      }, 1000);
+      this.setState({ btnStart: 'PAUSE' });
+    } else {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.setState({ btnStart: 'START' });
+    }
   }
 
-  componentDidMount() {
-    this.startTimer();
-    return () => {
-      clearInterval(this.timer)
-    };
-  }
+  // componentDidMount() {
+  //   this.startTimer();
+  //   return () => {
+  //     clearInterval(this.timer)
+  //   };
+  // }
 
   // componentDidUpdate(prevState, prevProps) {
   //   this.startTimer();
@@ -69,9 +87,25 @@ export default class Timer extends Component {
     )
   }
 
+  reset() {
+    if (this.timer !== null) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+    this.setState(
+      {
+        timeDate: '',
+        days: '00',
+        hours: '00',
+        minutes: '00',
+        seconds: '00',
+      },
+    );
+  }
+
   render() {
 
-    const { days, hours, minutes, seconds } = this.state;
+    const { days, hours, minutes, seconds, btnStart } = this.state;
 
     return (
       <section className="timer-container">
@@ -79,16 +113,18 @@ export default class Timer extends Component {
 
         <section className="input-section">
           <div>
-            <input type="number" name="days" placeholder="Days" onChange={ this.handleChange } />
+            <input type="datetime-local" name="timeDate" onChange={ this.handleChange } />
+            {/* <input type="number" name="days" placeholder="Days" onChange={ this.handleChange } />
             <input type="number" name="hours" placeholder="Hours" onChange={ this.handleChange } />
             <input type="number" name="minutes" placeholder="Minutes" onChange={ this.handleChange } />
-            <input type="number" name="seconds" placeholder="Seconds" onChange={ this.handleChange } />
+            <input type="number" name="seconds" placeholder="Seconds" onChange={ this.handleChange } /> */}
           </div>
           
           <div>
-            <input type="button" value="Start" />
-            <input type="button" value="Pause" />
-            <input type="button" value="Reset" />
+            {/* <input type="button" value="Start" onClick={ this.startTimer } />
+            <input type="button" value="Pause" onClick={ this.startTimer } /> */}
+            <input type="button" value={ btnStart } onClick={ this.startTimer } />
+            <input type="button" value="RESET" onClick={ this.reset } />
           </div>
         </section>
 
